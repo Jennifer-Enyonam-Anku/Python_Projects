@@ -180,7 +180,7 @@ elif selected == "View Data":
     try:
         df = pd.read_csv("Employee Records.csv")
 
-        st.success("✅ Data loaded successfully!")
+        # Removed: st.success("✅ Data loaded successfully!")
         st.markdown(f"**Shape:** {df.shape[0]} rows × {df.shape[1]} columns")
 
         with st.expander("📄 Preview DataFrame"):
