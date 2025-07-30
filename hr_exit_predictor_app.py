@@ -224,11 +224,39 @@ elif selected == "View Data":
 # ABOUT TAB
 # ------------------------------------------------
 elif selected == "About":
-    st.title("ℹ About This App")
+    st.title("ℹ️ About This App")
     st.markdown("""
-        This Streamlit app predicts the probability that an employee may exit the organization.
+    Welcome to the **HR Exit Predictor** – an intelligent, data-driven application designed to empower HR professionals with the insights they need to make proactive talent decisions.
 
-        **Built by:** Jennifer Enyonam  
-        **Tools Used:** Python, Streamlit, Scikit-learn  
-        **Goal:** Help HR improve employee retention through data-driven prediction.
+    ---
+    ### 🎯 Purpose
+    This tool predicts the likelihood that an employee may exit an organization. The aim is to support HR managers in identifying potential retention risks early and making informed interventions.
+
+    ---
+    ### 🛠️ Technologies Used
+    - **Python** for scripting  
+    - **Pandas** and **NumPy** for data handling  
+    - **Scikit-learn** for building the Logistic Regression model  
+    - **Streamlit** for crafting an interactive user interface  
+    - **Joblib** for saving and loading model artifacts
+
+    ---
+    ### 👩🏽‍💻 Developed By
+    **Jennifer Enyonam**  
+    *Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate*  
+    Passionate about using data and technology to drive real-world solutions in HR, energy, and society at large.
+
+    ---
+    ### ❤️ Special Notes
+    - This is a demonstration tool meant for educational and analytical purposes.
+    - Always complement data-driven decisions with human judgment and organizational context.
+
+    ---
+    ### 📫 Contact / Feedback
+    Feel free to connect or provide feedback to help improve this app!  
+    - LinkedIn: [Jennifer Enyonam](https://www.linkedin.com)  
+    - Email: ankujenyonam5@gmail.com
+
+    ---
     """)
+    st.image("https://cdn-icons-png.flaticon.com/512/9074/9074702.png", width=300, caption="Powered by Data. Guided by Purpose.")
