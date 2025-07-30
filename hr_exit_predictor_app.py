@@ -30,10 +30,10 @@ st.markdown("""
             color: black !important;
         }
 
-        /* Updated Selectbox styling */
+        /* Selectbox wrapper and dropdown */
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #3EDAD8 !important;
+            background-color: #E3E7F7 !important;
             border-radius: 8px;
         }
 
@@ -44,7 +44,7 @@ st.markdown("""
             padding: 0.4rem;
         }
 
-        /* Slider styling */
+        /* 🎯 Slider styling: track and thumb */
         div[data-baseweb="slider"] > div > div > div:nth-child(2) {
             background: #4B0082 !important;
         }
@@ -55,7 +55,7 @@ st.markdown("""
             background-color: #4B0082 !important;
         }
 
-        /* Button styling */
+        /* 🎯 Button styling */
         div.stButton > button {
             background-color: #4B0082 !important;
             color: white !important;
@@ -157,13 +157,11 @@ elif selected == "Predictor":
             'Salary': [salary]
         })
 
-        # Ensure categorical columns are treated properly
         for col in ['Job Title', 'Department', 'Gender', 'Marital Status']:
             new_data[col] = new_data[col].astype('category')
 
         new_encoded = pd.get_dummies(new_data)
 
-        # Ensure all expected columns are present
         for col in X_columns:
             if col not in new_encoded.columns:
                 new_encoded[col] = 0
@@ -184,11 +182,11 @@ elif selected == "View Data":
 # ABOUT TAB
 # ------------------------------------------------
 elif selected == "About":
-    st.title("ℹ️ About This App")
+    st.title("ℹ About This App")
     st.markdown("""
         This Streamlit app predicts the probability that an employee may exit the organization.
 
-        **Built by:** Jennifer Enyonam  
-        **Tools:** Python, Streamlit, Scikit-learn  
-        **Goal:** Help HR improve employee retention through data-driven prediction.
+        *Built by:* Jennifer Enyonam  
+        *Tools:* Python, Streamlit, Scikit-learn  
+        *Goal:* Help HR improve employee retention through data-driven prediction.
     """)
