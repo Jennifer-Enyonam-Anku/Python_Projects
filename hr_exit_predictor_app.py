@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -16,35 +16,26 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 # ------------------------------------------------
 st.markdown("""
     <style>
-        /* Sidebar styling */
         [data-testid="stSidebar"] {
             background-color: #E3E7F7 !important;
         }
         [data-testid="stSidebar"] > div:first-child {
             border-right: none;
         }
-
-        /* Light theme override */
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
             color: black !important;
         }
-
-        /* Selectbox wrapper and dropdown */
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
             background-color: #E3E7F7 !important;
             border-radius: 8px;
         }
-
-        /* Number input (Salary) */
         input[type="number"] {
             background-color: #E3E7F7 !important;
             border-radius: 8px;
             padding: 0.4rem;
         }
-
-        /* 🎯 Slider styling: track and thumb */
         div[data-baseweb="slider"] > div > div > div:nth-child(2) {
             background: #4B0082 !important;
         }
@@ -54,8 +45,6 @@ st.markdown("""
         div[data-baseweb="slider"] [role="slider"] {
             background-color: #4B0082 !important;
         }
-
-        /* 🎯 Button styling */
         div.stButton > button {
             background-color: #4B0082 !important;
             color: white !important;
@@ -68,7 +57,6 @@ st.markdown("""
         div.stButton > button:hover {
             background-color: #3a006b !important;
         }
-
         .block-container {
             padding-top: 2rem;
             padding-bottom: 2rem;
@@ -91,13 +79,10 @@ with st.sidebar:
         menu_title=None,
         options=["Home", "Predictor", "View Data", "About"],
         icons=["house", "bar-chart", "folder", "info-circle"],
-        default_index=1,
+        default_index=0,
         orientation="vertical",
         styles={
-            "container": {
-                "padding": "0!important",
-                "background-color": "#E3E7F7"
-            },
+            "container": {"padding": "0!important", "background-color": "#E3E7F7"},
             "icon": {"color": "#4B0082", "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
@@ -118,16 +103,32 @@ with st.sidebar:
 # ------------------------------------------------
 if selected == "Home":
     st.title("🏠 Welcome to the HR Exit Predictor")
-    st.write("Use the navigation on the left to explore the app and predict employee exits.")
+    st.markdown("""
+    This application is designed to help HR professionals identify employees who are likely to leave the organization, using historical data and machine learning.
+
+    ---
+    ### 🔍 What You Can Do:
+    - **Predict Exit Risk:** Use the *Predictor* tab to estimate the probability that an employee will leave based on input features like age, department, salary, etc.
+    - **Explore the Data:** View employee-related datasets (coming soon).
+    - **Learn More:** Visit the *About* section for more information on the app's purpose and development.
+    
+    ---
+    ### 📊 How It Works:
+    We use a **Logistic Regression** model trained on HR data to analyze patterns and predict exit probabilities. Inputs are standardized and encoded before feeding into the model.
+
+    ---
+    ### 📎 Disclaimer:
+    This tool is for educational and decision-support purposes only. It should not be the sole basis for HR decisions.
+    """)
+    st.image("https://cdn-icons-png.flaticon.com/512/6195/6195700.png", width=300, caption="HR Analytics for Smarter Decisions")
 
 # ------------------------------------------------
-# PREDICT TAB
+# PREDICTOR TAB
 # ------------------------------------------------
 elif selected == "Predictor":
     st.title("🧠 Employee Exit Probability Predictor")
     st.write("Fill in the employee details to predict their likelihood of exiting.")
 
-    # Input fields
     job_title = st.selectbox("Job Title", [
         'Marketing Analyst', 'Product Manager', 'HR Specialist', 'Software Developer',
         'Sales Executive', 'Data Scientist', 'Network Engineer', 'Telecom Technician',
@@ -145,7 +146,6 @@ elif selected == "Predictor":
     years_of_service = st.slider("Years of Service", 1, 10, 2)
     salary = st.number_input("Salary", min_value=100.0, max_value=1000.0, value=350.0)
 
-    # Prediction logic
     if st.button("Predict Exit Probability"):
         new_data = pd.DataFrame({
             'Job Title': [job_title],
@@ -186,7 +186,7 @@ elif selected == "About":
     st.markdown("""
         This Streamlit app predicts the probability that an employee may exit the organization.
 
-        *Built by:* Jennifer Enyonam  
-        *Tools:* Python, Streamlit, Scikit-learn  
-        *Goal:* Help HR improve employee retention through data-driven prediction.
+        **Built by:** Jennifer Enyonam  
+        **Tools Used:** Python, Streamlit, Scikit-learn  
+        **Goal:** Help HR improve employee retention through data-driven prediction.
     """)
