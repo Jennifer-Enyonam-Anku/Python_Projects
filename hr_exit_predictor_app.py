@@ -171,6 +171,14 @@ elif selected == "Predictor":
         prob = model.predict_proba(new_scaled)[0][1] * 100
         st.success(f"Predicted Exit Probability: {prob:.2f}%")
 
+        st.markdown("### 💡 HR Recommendation")
+        if prob < 30:
+            st.info("🟢 **Low Risk:** The employee is likely to stay. Continue monitoring and provide regular support.")
+        elif 30 <= prob <= 70:
+            st.warning("🟡 **Moderate Risk:** Engage the employee. Consider offering professional development, mentorship, or workload reviews.")
+        else:
+            st.error("🔴 **High Risk:** Take immediate action. Consider a one-on-one conversation, career growth incentives, or team reassignment.")
+
 # ------------------------------------------------
 # VIEW DATA TAB
 # ------------------------------------------------
@@ -180,7 +188,6 @@ elif selected == "View Data":
     try:
         df = pd.read_csv("Employee Records.csv")
 
-        # Removed: st.success("✅ Data loaded successfully!")
         st.markdown(f"**Shape:** {df.shape[0]} rows × {df.shape[1]} columns")
 
         with st.expander("📄 Preview DataFrame"):
