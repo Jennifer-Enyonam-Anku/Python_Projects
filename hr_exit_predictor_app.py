@@ -109,7 +109,7 @@ if selected == "Home":
     ---
     ### 🔍 What You Can Do:
     - **Predict Exit Risk:** Use the *Predictor* tab to estimate the probability that an employee will leave based on input features like age, department, salary, etc.
-    - **Explore the Data:** View employee-related datasets (coming soon).
+    - **Explore the Data:** View employee-related datasets.
     - **Learn More:** Visit the *About* section for more information on the app's purpose and development.
     
     ---
@@ -175,8 +175,50 @@ elif selected == "Predictor":
 # VIEW DATA TAB
 # ------------------------------------------------
 elif selected == "View Data":
-    st.title("📁 View Employee Data")
-    st.info("Feature coming soon! You can load Existing_Staff and Exited_Staff datasets here.")
+    st.title("📁 View Employee Records")
+
+    try:
+        df = pd.read_csv("Employee Records.csv")
+
+        st.success("✅ Data loaded successfully!")
+        st.markdown(f"**Shape:** {df.shape[0]} rows × {df.shape[1]} columns")
+
+        with st.expander("📄 Preview DataFrame"):
+            st.dataframe(df.style.set_properties(**{'background-color': '#F0F4FF'}, subset=df.columns))
+
+        with st.expander("🧾 Data Summary"):
+            st.write(df.describe(include='all').T)
+
+        st.markdown("### 🎛️ Filter Data")
+        selected_dept = st.multiselect("Filter by Department", options=df['Department'].dropna().unique())
+        selected_gender = st.multiselect("Filter by Gender", options=df['Gender'].dropna().unique())
+
+        filtered_df = df.copy()
+        if selected_dept:
+            filtered_df = filtered_df[filtered_df['Department'].isin(selected_dept)]
+        if selected_gender:
+            filtered_df = filtered_df[filtered_df['Gender'].isin(selected_gender)]
+
+        st.markdown(f"**Filtered Rows:** {filtered_df.shape[0]}")
+        st.dataframe(filtered_df.reset_index(drop=True))
+
+        st.markdown("### 📊 Insights")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("**Gender Distribution**")
+            gender_count = filtered_df['Gender'].value_counts()
+            st.bar_chart(gender_count)
+
+        with col2:
+            st.markdown("**Department Breakdown**")
+            dept_count = filtered_df['Department'].value_counts()
+            st.bar_chart(dept_count)
+
+    except Exception as e:
+        st.error(f"⚠️ Error loading data: {e}")
+        st.info("Please make sure 'Employee Records.csv' is in the same directory or uploaded correctly.")
 
 # ------------------------------------------------
 # ABOUT TAB
