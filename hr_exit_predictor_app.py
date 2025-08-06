@@ -114,7 +114,7 @@ if selected == "Home":
     
     ---
     ### 📊 How It Works:
-    We use a **Logistic Regression** model trained on HR data to analyze patterns and predict exit probabilities. Inputs are standardized and encoded before feeding into the model.
+    We use a **Random Forest +SMOTE** model trained on HR data to analyze patterns and predict exit probabilities. Inputs are standardized and encoded before feeding into the model.
 
     ---
     ### 📎 Disclaimer:
