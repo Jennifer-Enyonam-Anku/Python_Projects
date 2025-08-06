@@ -83,7 +83,7 @@ with st.sidebar:
         orientation="vertical",
         styles={
             "container": {"padding": "0!important", "background-color": "#006983"},
-            "icon": {"color": "#002c66", "font-size": "20px"},
+            "icon": {"color": "#af4c0f", "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
                 "text-align": "left",
