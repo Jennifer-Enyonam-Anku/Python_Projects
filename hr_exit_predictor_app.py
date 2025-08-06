@@ -37,7 +37,7 @@ st.markdown("""
             padding: 0.4rem;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-            background: #002c66 !important;
+            background: #ff66c4 !important;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(3) {
             background: #e6e6e6 !important;
