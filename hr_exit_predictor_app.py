@@ -43,10 +43,10 @@ st.markdown("""
             background: #af4c0f !important;
         }
         div[data-baseweb="slider"] [role="slider"] {
-            background-color: #002c66 !important;
+            background-color: #af4c0f !important;
         }
         div.stButton > button {
-            background-color: #002c66 !important;
+            background-color: #af4c0f !important;
             color: white !important;
             border-radius: 8px !important;
             height: 3em;
