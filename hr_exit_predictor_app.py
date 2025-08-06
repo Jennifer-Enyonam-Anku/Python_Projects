@@ -24,11 +24,11 @@ st.markdown("""
         }
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
-            color: white !important;
+            color: black !important;
         }
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: ##16abc2 !important;
+            background-color: #ff66c42 !important;
             border-radius: 8px;
         }
         input[type="number"] {
