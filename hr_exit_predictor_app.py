@@ -93,7 +93,7 @@ with st.sidebar:
             },
             "nav-link-selected": {
                 "background-color": "#00b4d8",
-                "color": "#000000"
+                "color": "#ffffff"
             },
         },
     )
