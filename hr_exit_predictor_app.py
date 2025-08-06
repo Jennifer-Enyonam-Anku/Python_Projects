@@ -37,16 +37,16 @@ st.markdown("""
             padding: 0.4rem;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-            background: #4B0082 !important;
+            background: #006983 !important;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(3) {
             background: #e6e6e6 !important;
         }
         div[data-baseweb="slider"] [role="slider"] {
-            background-color: #4B0082 !important;
+            background-color: #006983 !important;
         }
         div.stButton > button {
-            background-color: #4B0082 !important;
+            background-color: #006983 !important;
             color: white !important;
             border-radius: 8px !important;
             height: 3em;
@@ -83,7 +83,7 @@ with st.sidebar:
         orientation="vertical",
         styles={
             "container": {"padding": "0!important", "background-color": "#002c66"},
-            "icon": {"color": "#4B0082", "font-size": "20px"},
+            "icon": {"color": "#006983", "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
                 "text-align": "left",
