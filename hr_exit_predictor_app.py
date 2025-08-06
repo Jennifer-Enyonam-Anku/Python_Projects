@@ -17,7 +17,7 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {
-            background-color: #002c66 !important;
+            background-color: #16abc2 !important;
         }
         [data-testid="stSidebar"] > div:first-child {
             border-right: none;
@@ -28,11 +28,11 @@ st.markdown("""
         }
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #002c66 !important;
+            background-color: ##16abc2 !important;
             border-radius: 8px;
         }
         input[type="number"] {
-            background-color: #002c66 !important;
+            background-color: #16abc2 !important;
             border-radius: 8px;
             padding: 0.4rem;
         }
@@ -82,7 +82,7 @@ with st.sidebar:
         default_index=0,
         orientation="vertical",
         styles={
-            "container": {"padding": "0!important", "background-color": "#002c66"},
+            "container": {"padding": "0!important", "background-color": "#16abc2"},
             "icon": {"color": "#006983", "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
