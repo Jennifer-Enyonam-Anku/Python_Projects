@@ -55,7 +55,7 @@ st.markdown("""
             border: none;
         }
         div.stButton > button:hover {
-            background-color: #3a006b !important;
+            background-color: #af4c0f !important;
         }
         .block-container {
             padding-top: 2rem;
