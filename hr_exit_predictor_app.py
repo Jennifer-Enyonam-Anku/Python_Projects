@@ -40,7 +40,7 @@ st.markdown("""
             background: #002c66 !important;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(3) {
-            background: #e6e6e6 !important;
+            background: #af4c0f !important;
         }
         div[data-baseweb="slider"] [role="slider"] {
             background-color: #002c66 !important;
