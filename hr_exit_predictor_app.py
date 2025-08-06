@@ -23,7 +23,7 @@ st.markdown("""
             border-right: none;
         }
         html, body, [data-testid="stAppViewContainer"] > .main {
-            background-color: black !important;
+            background-color: white !important;
             color: black !important;
         }
         .stSelectbox > div,
