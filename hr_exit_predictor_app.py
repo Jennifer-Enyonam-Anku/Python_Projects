@@ -83,16 +83,16 @@ with st.sidebar:
         orientation="vertical",
         styles={
             "container": {"padding": "0!important", "background-color": "#006983"},
-            "icon": {"color": "#3edad8", "font-size": "25px"},
+            "icon": {"color": "#3edad8", "font-size": "22px"},
             "nav-link": {
-                "font-size": "25px",
+                "font-size": "20px",
                 "text-align": "left",
                 "margin": "0px",
                 "--hover-color": "#002c66",
-                "color": "#000000"
+                "color": "#ffffff"
             },
             "nav-link-selected": {
-                "background-color": "#C2C7EA",
+                "background-color": "#00b4d8",
                 "color": "#000000"
             },
         },
