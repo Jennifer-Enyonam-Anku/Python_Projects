@@ -88,8 +88,8 @@ with st.sidebar:
                 "font-size": "16px",
                 "text-align": "left",
                 "margin": "0px",
-                "--hover-color": "#af4c0f",
-                "color": "#333333"
+                "--hover-color": "#002c66",
+                "color": "#af4c0f"
             },
             "nav-link-selected": {
                 "background-color": "#C2C7EA",
