@@ -28,11 +28,11 @@ st.markdown("""
         }
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #E3E7F7 !important;
+            background-color: #90e0ef !important;
             border-radius: 8px; 
         }
         input[type="number"] {
-            background-color: #E3E7F7 !important;
+            background-color: #90e0ef !important;
             border-radius: 8px;
             padding: 0.4rem;
         }
