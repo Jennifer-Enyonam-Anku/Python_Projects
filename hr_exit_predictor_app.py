@@ -85,11 +85,11 @@ with st.sidebar:
             "container": {"padding": "0!important", "background-color": "#006983"},
             "icon": {"color": "#3edad8", "font-size": "25px"},
             "nav-link": {
-                "font-size": "16px",
+                "font-size": "25px",
                 "text-align": "left",
                 "margin": "0px",
                 "--hover-color": "#002c66",
-                "color": "#af4c0f"
+                "color": "#000000"
             },
             "nav-link-selected": {
                 "background-color": "#C2C7EA",
