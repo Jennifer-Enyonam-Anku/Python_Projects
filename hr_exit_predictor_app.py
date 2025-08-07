@@ -11,44 +11,37 @@ import joblib
 # ================================================
 st.markdown("""
 <style>
-    /* NUCLEAR OPTION FOR SIDEBAR WHITE CORNERS */
+    /* AGGRESSIVE FIX: REMOVE ALL PADDING/MARGIN/BORDERS ON CORE SIDEBAR CONTAINERS */
     [data-testid="stSidebar"] {
         background-color: #006983 !important;
-        border-radius: 0px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
     }
 
-    [data-testid="stSidebar"] > div:first-child {
+    [data-testid="stSidebarNav"] {
         background-color: #006983 !important;
         padding: 0 !important;
         margin: 0 !important;
+        border-radius: 0 !important;
     }
 
-    [data-testid="stSidebar"] > div:first-child > div > div {
+    /* SPECIFIC FIX FOR THE OPTION MENU COMPONENT */
+    div[data-testid="stSidebarNav"] > div > ul {
         background-color: #006983 !important;
-        margin: 0 !important;
+        border-radius: 0 !important;
         padding: 0 !important;
-        border-radius: 0px !important;
-    }
-
-    /* MORE AGGRESSIVE FIX FOR THE WHITE CORNERS AROUND THE MENU */
-    div[data-testid="stSidebarNav"] {
-        border-radius: 0px !important;
+        margin: 0 !important;
     }
     
-    div[data-testid="stSidebarNav"] ul {
-        border-radius: 0px !important;
-    }
-
-    div[role="menuitem"] {
-        border-radius: 0px !important;
-    }
-    
+    /* FIX FOR SIDEBAR CONTENT WRAPPER */
     .st-emotion-cache-1vq4p4l {
         padding: 0 !important;
         margin: 0 !important;
         background-color: #006983 !important;
     }
-
+    
+    /* FIX FOR SIDEBAR NAV LINK CONTAINER */
     .st-emotion-cache-1wbqy5l {
         gap: 0 !important;
     }
