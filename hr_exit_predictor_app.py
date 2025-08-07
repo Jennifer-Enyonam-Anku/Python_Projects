@@ -108,7 +108,7 @@ if selected == "Home":
 
     ---
     ### 📊 Powered By:
-    Random Forest + SMOTE
+    Random Forest + SMOTE  
     Inputs are standardized and encoded before prediction.
 
     ---
@@ -158,22 +158,25 @@ elif selected == "Predictor":
         input_df['Salary_Band'] = pd.cut(input_df['Salary'], bins=[0, 200, 300, 400, 500, 1000],
                                          labels=['<200', '200-299', '300-399', '400-499', '500+'])
 
-        # Drop unneeded columns
+        # Drop leakage columns
         input_df.drop(columns=['Age', 'Salary'], inplace=True)
 
         # One-hot encoding
         input_encoded = pd.get_dummies(input_df, drop_first=True)
 
-        # Ensure all expected columns are present
+        # Add missing columns with zero
         for col in X_columns:
             if col not in input_encoded.columns:
                 input_encoded[col] = 0
-        input_encoded = input_encoded[X_columns]
 
-        # Scale numeric features
+        # Ensure correct column order and format
+        input_encoded = input_encoded[X_columns]
+        input_encoded = pd.DataFrame(input_encoded, columns=X_columns)
+
+        # Scale input
         input_scaled = scaler.transform(input_encoded)
 
-        # Predict probability
+        # Predict exit probability
         prob = model.predict_proba(input_scaled)[0][1] * 100
         st.success(f"Predicted Exit Probability: {prob:.2f}%")
 
@@ -244,10 +247,10 @@ elif selected == "About":
 
     ---
     ### 🛠 Technologies Used
-    - Python, Pandas, NumPy
-    - Scikit-learn (Random Forest + SMOTE)
-    - Streamlit for interactive interface
-    - Joblib for saving/loading model files
+    - Python, Pandas, NumPy  
+    - Scikit-learn (Random Forest + SMOTE)  
+    - Streamlit for UI  
+    - Joblib for model saving/loading
 
     ---
     ### 👩🏽‍💻 Developed By
@@ -256,7 +259,7 @@ elif selected == "About":
 
     ---
     ### 📫 Contact
-    - Email: ankujenyonam5@gmail.com
+    - Email: ankujenyonam5@gmail.com  
     - LinkedIn: [Jennifer Enyonam](https://www.linkedin.com)
 
     ---
