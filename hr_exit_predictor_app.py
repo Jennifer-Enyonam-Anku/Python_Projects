@@ -108,7 +108,7 @@ if selected == "Home":
 
     ---
     ### 📊 Powered By:
-    Random Forest + SMOTE + Feature Engineering  
+    Random Forest + SMOTE 
     Inputs are standardized and encoded before prediction.
 
     ---
