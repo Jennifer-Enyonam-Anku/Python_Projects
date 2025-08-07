@@ -89,7 +89,7 @@ with st.sidebar:
                 "text-align": "left",
                 "margin": "0px",
                 "--hover-color": "#002c66",
-                "color": "#002c66"
+                "color": "#ffffff"
             },
             "nav-link-selected": {
                 "background-color": "#00b4d8",
