@@ -111,6 +111,7 @@ try:
     X_columns = joblib.load('X_columns.pkl')
 except FileNotFoundError:
     st.error("Error: Model files ('logreg_model.pkl', 'scaler.pkl', 'X_columns.pkl') not found.")
+    st.info("Please make sure these files are in the same directory as your Python script.")
     st.stop()
 
 # ================================================
@@ -277,9 +278,11 @@ elif selected == "View Data":
             dept_count = filtered_df['Department'].value_counts()
             st.bar_chart(dept_count)
 
+    except FileNotFoundError:
+        st.error("⚠️ Error loading data: 'Employee Records.csv' not found.")
+        st.info("Please make sure the CSV file is in the same directory as your script.")
     except Exception as e:
-        st.error(f"⚠️ Error loading data: {e}")
-        st.info("Please make sure 'Employee Records.csv' is in the same directory or uploaded correctly.")
+        st.error(f"⚠️ An unexpected error occurred: {e}")
 
 # ================================================
 # ABOUT TAB
@@ -319,4 +322,3 @@ elif selected == "About":
     ---
     """)
     st.image("https://cdn-icons-png.flaticon.com/512/9074/9074702.png", width=300, caption="Powered by Data. Guided by Purpose.")
-```
