@@ -4,18 +4,17 @@ from streamlit_option_menu import option_menu
 # ------------------------------------------------
 # PAGE CONFIGURATION
 # ------------------------------------------------
-st.set_page_config(page_title="Overlay Hack Test", layout="wide")
+st.set_page_config(page_title="Overlay Hack Fix", layout="wide")
 
 # ------------------------------------------------
-# STYLE: Dark sidebar + overlay mask
+# CORNER MASKING ONLY
 # ------------------------------------------------
 st.markdown("""
     <style>
-        /* Sidebar background */
+        /* Sidebar base */
         [data-testid="stSidebar"] {
             background-color: #006983 !important;
             position: relative;
-            z-index: 1;
         }
 
         html, body, [data-testid="stAppViewContainer"] > .main {
@@ -23,26 +22,49 @@ st.markdown("""
             color: black !important;
         }
 
-        /* Menu item style overrides */
+        /* Selected menu item style */
         .nav-link-selected {
             background-color: #00b4d8 !important;
             color: #ffffff !important;
         }
 
-        /* 🔧 Overlay mask to hide white corners */
-        [data-testid="stSidebar"]::before {
+        /* 🔧 Overlay corner patches */
+        .corner-mask {
             content: "";
             position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #006983;
+            z-index: 1000;
+        }
+
+        .corner-top-left {
             top: 0;
             left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #006983;
-            border-radius: 0px;
-            z-index: 2;
-            pointer-events: none;
+            border-top-left-radius: 8px;
+        }
+
+        .corner-bottom-left {
+            bottom: 0;
+            left: 0;
+            border-bottom-left-radius: 8px;
         }
     </style>
+
+    <script>
+        // Inject divs into sidebar after it renders
+        window.addEventListener('DOMContentLoaded', function () {
+            const sidebar = parent.document.querySelector('[data-testid="stSidebar"]');
+            if (sidebar) {
+                const topCorner = document.createElement('div');
+                topCorner.className = 'corner-mask corner-top-left';
+                const bottomCorner = document.createElement('div');
+                bottomCorner.className = 'corner-mask corner-bottom-left';
+                sidebar.appendChild(topCorner);
+                sidebar.appendChild(bottomCorner);
+            }
+        });
+    </script>
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------
@@ -73,12 +95,12 @@ with st.sidebar:
     )
 
 # ------------------------------------------------
-# MAIN CONTENT
+# PAGE CONTENT
 # ------------------------------------------------
 if selected == "Home":
     st.title("🏠 Home")
-    st.write("Overlay mask is active. White border should now be visually gone.")
+    st.write("Corner mask is active. White edge should now be hidden visually.")
 
 elif selected == "Predictor":
     st.title("📊 Predictor")
-    st.write("Click between tabs. Confirm if the white corner border is hidden.")
+    st.write("Test the tab switch — no more white corner should be visible.")
