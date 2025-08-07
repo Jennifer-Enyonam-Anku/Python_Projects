@@ -4,51 +4,43 @@ from streamlit_option_menu import option_menu
 # ------------------------------------------------
 # PAGE CONFIGURATION
 # ------------------------------------------------
-st.set_page_config(page_title="Sidebar Border Fix Test", layout="wide")
+st.set_page_config(page_title="Overlay Hack Test", layout="wide")
 
 # ------------------------------------------------
-# FINAL CSS TO REMOVE WHITE BORDER
+# STYLE: Dark sidebar + overlay mask
 # ------------------------------------------------
 st.markdown("""
     <style>
-        /* Sidebar background and layout */
+        /* Sidebar background */
         [data-testid="stSidebar"] {
             background-color: #006983 !important;
+            position: relative;
+            z-index: 1;
         }
+
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
             color: black !important;
         }
 
-        /* FINAL FIX: Kill white borders, focus rings, shadows, corners */
-        [data-testid="stSidebar"] .nav-link,
-        [data-testid="stSidebar"] .nav-link:focus,
-        [data-testid="stSidebar"] .nav-link:focus-visible,
-        [data-testid="stSidebar"] .nav-link:active,
-        [data-testid="stSidebar"] .nav-link-selected,
-        [data-testid="stSidebar"] .nav-link-selected:focus,
-        [data-testid="stSidebar"] .nav-link-selected:focus-visible,
-        [data-testid="stSidebar"] .nav-link-selected:active {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
-            background-image: none !important;
-            border-radius: 0px !important;
-        }
-
-        /* Global fallback */
-        *:focus {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-        *:focus-visible {
-            outline: none !important;
-        }
-
-        /* Selected menu item styling */
+        /* Menu item style overrides */
         .nav-link-selected {
             background-color: #00b4d8 !important;
             color: #ffffff !important;
+        }
+
+        /* 🔧 Overlay mask to hide white corners */
+        [data-testid="stSidebar"]::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #006983;
+            border-radius: 0px;
+            z-index: 2;
+            pointer-events: none;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -81,12 +73,12 @@ with st.sidebar:
     )
 
 # ------------------------------------------------
-# PAGE CONTENT
+# MAIN CONTENT
 # ------------------------------------------------
 if selected == "Home":
     st.title("🏠 Home")
-    st.write("This is the Home section. White border should be completely gone.")
+    st.write("Overlay mask is active. White border should now be visually gone.")
 
 elif selected == "Predictor":
     st.title("📊 Predictor")
-    st.write("This is the Predictor section. Again, no white border should be visible.")
+    st.write("Click between tabs. Confirm if the white corner border is hidden.")
