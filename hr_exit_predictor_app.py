@@ -17,7 +17,7 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {
-            background-color: #006983 !important;
+            background-color: #00b4d8 !important;
         }
         [data-testid="stSidebar"] > div:first-child {
             border-right: none;
@@ -60,10 +60,6 @@ st.markdown("""
         .block-container {
             padding-top: 2rem;
             padding-bottom: 2rem;
-        }
-        /* Remove rounded corners on all nav items */
-        .nav-link, .nav-link-selected {
-            border-radius: 0px !important;
         }
     </style>
 """, unsafe_allow_html=True)
