@@ -17,8 +17,18 @@ st.markdown("""
         padding: 0 !important;
         margin: 0 !important;
         border-radius: 0 !important;
+        overflow: hidden !important; /* Hide any overflow from nested elements */
     }
 
+    /* Target all divs and uls within the sidebar to be safe */
+    [data-testid="stSidebar"] div, [data-testid="stSidebar"] ul {
+        background-color: #006983 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    /* Ensure the sidebar navigation container has no padding/margins */
     [data-testid="stSidebarNav"] {
         background-color: #006983 !important;
         padding: 0 !important;
@@ -26,21 +36,21 @@ st.markdown("""
         border-radius: 0 !important;
     }
 
-    /* SPECIFIC FIX FOR THE OPTION MENU COMPONENT */
-    #root > div:nth-child(1) > div > div > div > div > section > div > div:nth-child(1) > div > div > div > nav > ul {
-        border-radius: 0 !important;
-    }
-    
-    /* FIX FOR SIDEBAR CONTENT WRAPPER */
-    .st-emotion-cache-1vq4p4l {
+    /* Target the specific container for the menu items */
+    .st-emotion-cache-1vq4p4l, .st-emotion-cache-1wbqy5l {
         padding: 0 !important;
         margin: 0 !important;
         background-color: #006983 !important;
     }
     
-    /* FIX FOR SIDEBAR NAV LINK CONTAINER */
-    .st-emotion-cache-1wbqy5l {
-        gap: 0 !important;
+    /* Target the option menu's list directly */
+    div.nav-menu-container > ul {
+        border-radius: 0px !important;
+    }
+
+    /* Ensure all menu links are styled correctly */
+    div.nav-menu-container a {
+        border-radius: 0px !important;
     }
 
     /* MAIN CONTENT STYLING */
