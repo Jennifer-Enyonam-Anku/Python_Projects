@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -29,7 +29,7 @@ st.markdown("""
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
             background-color: #90e0ef !important;
-            border-radius: 8px;
+            border-radius: 8px; 
         }
         input[type="number"] {
             background-color: #90e0ef !important;
@@ -61,7 +61,7 @@ st.markdown("""
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-        /* ✅ FIX: Remove white borders or outlines */
+        /* 🔧 FIX WHITE BORDER ON ACTIVE MENU ITEMS */
         .nav-link:focus,
         .nav-link:focus-visible,
         .nav-link:active {
@@ -116,21 +116,21 @@ with st.sidebar:
 if selected == "Home":
     st.title("🏠 Welcome to the HR Exit Predictor")
     st.markdown("""
-    This application helps HR professionals identify employees who are likely to leave the organization using historical data and machine learning.
+    This application is designed to help HR professionals identify employees who are likely to leave the organization, using historical data and machine learning.
 
     ---
     ### 🔍 What You Can Do:
-    - **Predict Exit Risk:** Use the *Predictor* tab to estimate exit probabilities.
-    - **Explore the Data:** Use the *View Data* tab to explore employee datasets.
-    - **Learn More:** Visit the *About* section for details on the app.
-
+    - **Predict Exit Risk:** Use the *Predictor* tab to estimate the probability that an employee will leave based on input features like age, department, salary, etc.
+    - **Explore the Data:** View employee-related datasets.
+    - **Learn More:** Visit the *About* section for more information on the app's purpose and development.
+    
     ---
     ### 📊 How It Works:
-    We use a **Random Forest + SMOTE** model trained on HR data. Inputs are encoded and scaled before prediction.
+    We use a **Random Forest +SMOTE** model trained on HR data to analyze patterns and predict exit probabilities. Inputs are standardized and encoded before feeding into the model.
 
     ---
     ### 📎 Disclaimer:
-    This is a decision-support tool for educational use.
+    This tool is for educational and decision-support purposes only. It should not be the sole basis for HR decisions.
     """)
     st.image("https://cdn-icons-png.flaticon.com/512/6195/6195700.png", width=300, caption="HR Analytics for Smarter Decisions")
 
@@ -184,11 +184,11 @@ elif selected == "Predictor":
 
         st.markdown("### 💡 HR Recommendation")
         if prob < 30:
-            st.info("🟢 **Low Risk:** Likely to stay. Continue monitoring and supporting.")
+            st.info("🟢 **Low Risk:** The employee is likely to stay. Continue monitoring and provide regular support.")
         elif 30 <= prob <= 70:
-            st.warning("🟡 **Moderate Risk:** Engage the employee with mentorship, training, or workload reviews.")
+            st.warning("🟡 **Moderate Risk:** Engage the employee. Consider offering professional development, mentorship, or workload reviews.")
         else:
-            st.error("🔴 **High Risk:** Act now. Consider conversation, incentives, or role reassignment.")
+            st.error("🔴 **High Risk:** Take immediate action. Consider a one-on-one conversation, career growth incentives, or team reassignment.")
 
 # ------------------------------------------------
 # VIEW DATA TAB
@@ -221,19 +221,22 @@ elif selected == "View Data":
         st.dataframe(filtered_df.reset_index(drop=True))
 
         st.markdown("### 📊 Insights")
+
         col1, col2 = st.columns(2)
 
         with col1:
             st.markdown("**Gender Distribution**")
-            st.bar_chart(filtered_df['Gender'].value_counts())
+            gender_count = filtered_df['Gender'].value_counts()
+            st.bar_chart(gender_count)
 
         with col2:
             st.markdown("**Department Breakdown**")
-            st.bar_chart(filtered_df['Department'].value_counts())
+            dept_count = filtered_df['Department'].value_counts()
+            st.bar_chart(dept_count)
 
     except Exception as e:
         st.error(f"⚠️ Error loading data: {e}")
-        st.info("Ensure 'Employee Records.csv' is available in the working directory.")
+        st.info("Please make sure 'Employee Records.csv' is in the same directory or uploaded correctly.")
 
 # ------------------------------------------------
 # ABOUT TAB
@@ -241,27 +244,34 @@ elif selected == "View Data":
 elif selected == "About":
     st.title("ℹ️ About This App")
     st.markdown("""
-    Welcome to the **HR Exit Predictor** – a data-powered app that empowers HR professionals to predict and manage staff attrition risks.
+    Welcome to the **HR Exit Predictor** – an intelligent, data-driven application designed to empower HR professionals with the insights they need to make proactive talent decisions.
 
     ---
     ### 🎯 Purpose
-    Predict the likelihood of employee exits to enable early HR interventions and retention strategies.
+    This tool predicts the likelihood that an employee may exit an organization. The aim is to support HR managers in identifying potential retention risks early and making informed interventions.
 
     ---
-    ### 🛠️ Built With
-    - **Python** – Programming  
-    - **Pandas & NumPy** – Data processing  
-    - **Scikit-learn** – ML model  
-    - **Streamlit** – Web interface  
-    - **Joblib** – Model storage
+    ### 🛠️ Technologies Used
+    - **Python** for scripting  
+    - **Pandas** and **NumPy** for data handling  
+    - **Scikit-learn** for building the Logistic Regression model  
+    - **Streamlit** for crafting an interactive user interface  
+    - **Joblib** for saving and loading model artifacts
 
     ---
-    ### 👩🏽‍💻 Developer
+    ### 👩🏽‍💻 Developed By
     **Jennifer Enyonam**  
-    Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate
+    *Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate*  
+    Passionate about using data and technology to drive real-world solutions in HR, energy, and society at large.
 
     ---
-    ### 💌 Feedback & Contact
+    ### ❤️ Special Notes
+    - This is a demonstration tool meant for educational and analytical purposes.
+    - Always complement data-driven decisions with human judgment and organizational context.
+
+    ---
+    ### 📫 Contact / Feedback
+    Feel free to connect or provide feedback to help improve this app!  
     - LinkedIn: [Jennifer Enyonam](https://www.linkedin.com)  
     - Email: ankujenyonam5@gmail.com
 
