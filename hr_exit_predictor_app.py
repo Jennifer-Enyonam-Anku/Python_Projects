@@ -133,7 +133,7 @@ with st.sidebar:
             },
             "nav-link-selected": {
                 "background-color": "#00b4d8 !important",
-                "color": "#ffffff !important",
+                "color": "#000000 !important",
                 "border-radius": "0 !important",
                 "border": "none !important"
             },
