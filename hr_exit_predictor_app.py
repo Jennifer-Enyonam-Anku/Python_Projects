@@ -4,39 +4,51 @@ from streamlit_option_menu import option_menu
 # ------------------------------------------------
 # PAGE CONFIGURATION
 # ------------------------------------------------
-st.set_page_config(page_title="Test Sidebar", layout="wide")
+st.set_page_config(page_title="Sidebar Test", layout="wide")
 
 # ------------------------------------------------
-# CUSTOM STYLING (MINIMAL STRIP DOWN)
+# FINAL CSS FIX TO REMOVE WHITE BORDER
 # ------------------------------------------------
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {
             background-color: #006983 !important;
         }
-        [data-testid="stSidebar"] > div:first-child {
-            border-right: none;
-        }
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
             color: black !important;
         }
 
-        /* ✅ Final attempt to kill all white borders on active menu items */
-        [data-testid="stSidebar"] .nav-link:focus,
-        [data-testid="stSidebar"] .nav-link:focus-visible,
-        [data-testid="stSidebar"] .nav-link:active,
-        [data-testid="stSidebar"] .nav-link-selected {
+        /* ✅ FINAL FIX: REMOVE WHITE OUTLINES ON SELECTED MENU ITEM */
+        .nav-link,
+        .nav-link:focus,
+        .nav-link:focus-visible,
+        .nav-link:active,
+        .nav-link-selected,
+        .nav-link.nav-link-selected:focus,
+        .nav-link.nav-link-selected:focus-visible,
+        .nav-link.nav-link-selected:active {
             outline: none !important;
             box-shadow: none !important;
             border: none !important;
             background-image: none !important;
         }
+
+        .nav-link-selected {
+            background-color: #00b4d8 !important;
+            color: #ffffff !important;
+            border-top-left-radius: 8px !important;
+            border-bottom-left-radius: 8px !important;
+        }
+
+        .nav-link {
+            border-radius: 0px !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------
-# SIDEBAR TEST
+# SIDEBAR MENU (TEST)
 # ------------------------------------------------
 with st.sidebar:
     selected = option_menu(
@@ -63,12 +75,12 @@ with st.sidebar:
     )
 
 # ------------------------------------------------
-# SIMPLE PAGE RENDERING
+# PAGE DISPLAY
 # ------------------------------------------------
 if selected == "Home":
-    st.title("🏠 Home Test")
-    st.write("You are on the Home page.")
+    st.title("🏠 Home Page")
+    st.write("This is the Home section. White border should not be visible.")
 
 elif selected == "Predictor":
-    st.title("📊 Predictor Test")
-    st.write("You are on the Predictor page.")
+    st.title("📊 Predictor Page")
+    st.write("This is the Predictor section. Still no white border.")
