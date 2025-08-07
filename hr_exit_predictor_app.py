@@ -18,9 +18,14 @@ st.markdown("""
     <style>
         [data-testid="stSidebar"] {
             background-color: #006983 !important;
+            border-right: none !important;
         }
         [data-testid="stSidebar"] > div:first-child {
-            border-right: none;
+            background-color: #006983 !important;
+            border-right: none !important;
+        }
+        [data-testid="stSidebarNav"] {
+            background-color: #006983 !important;
         }
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
@@ -61,17 +66,11 @@ st.markdown("""
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-        /* 🔧 FIX WHITE BORDER ON ACTIVE MENU ITEMS */
-        .nav-link:focus,
-        .nav-link:focus-visible,
-        .nav-link:active {
-            outline: none !important;
-            box-shadow: none !important;
-            border: none !important;
+        .css-1oe5cao {
+            padding-top: 0rem;
         }
-        .nav-link {
-            border: none !important;
-            box-shadow: none !important;
+        .css-1vq4p4l {
+            padding: 1rem 1rem 1rem 1rem;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -94,18 +93,25 @@ with st.sidebar:
         default_index=0,
         orientation="vertical",
         styles={
-            "container": {"padding": "0!important", "background-color": "#006983"},
+            "container": {
+                "padding": "0!important", 
+                "background-color": "#006983",
+                "border": "none"
+            },
             "icon": {"color": "#3edad8", "font-size": "22px"},
             "nav-link": {
                 "font-size": "20px",
                 "text-align": "left",
                 "margin": "0px",
                 "--hover-color": "#002c66",
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "border-radius": "0px",
+                "padding": "10px 15px"
             },
             "nav-link-selected": {
                 "background-color": "#00b4d8",
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "border-radius": "0px"
             },
         },
     )
@@ -173,6 +179,7 @@ elif selected == "Predictor":
             new_data[col] = new_data[col].astype('category')
 
         new_encoded = pd.get_dummies(new_data)
+
         for col in X_columns:
             if col not in new_encoded.columns:
                 new_encoded[col] = 0
