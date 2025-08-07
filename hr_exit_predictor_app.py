@@ -14,7 +14,7 @@ with st.sidebar:
     st.markdown("""
         <style>
             [data-testid="stSidebar"] {
-                background-color: #ffffff !important;
+                background-color: #006983 !important;
             }
             html, body, [data-testid="stAppViewContainer"] > .main {
                 background-color: white !important;
