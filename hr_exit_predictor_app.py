@@ -14,6 +14,7 @@ st.markdown("""
     /* NUCLEAR OPTION FOR SIDEBAR WHITE CORNERS */
     [data-testid="stSidebar"] {
         background-color: #006983 !important;
+        border-radius: 0px !important;
     }
 
     [data-testid="stSidebar"] > div:first-child {
@@ -26,13 +27,22 @@ st.markdown("""
         background-color: #006983 !important;
         margin: 0 !important;
         padding: 0 !important;
+        border-radius: 0px !important;
+    }
+
+    /* MORE AGGRESSIVE FIX FOR THE WHITE CORNERS AROUND THE MENU */
+    div[data-testid="stSidebarNav"] {
+        border-radius: 0px !important;
     }
     
-    /* MORE AGGRESSIVE FIX FOR THE WHITE CORNERS AROUND THE MENU */
     div[data-testid="stSidebarNav"] ul {
         border-radius: 0px !important;
     }
 
+    div[role="menuitem"] {
+        border-radius: 0px !important;
+    }
+    
     .st-emotion-cache-1vq4p4l {
         padding: 0 !important;
         margin: 0 !important;
