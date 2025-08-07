@@ -4,53 +4,36 @@ from streamlit_option_menu import option_menu
 # ------------------------------------------------
 # PAGE CONFIGURATION
 # ------------------------------------------------
-st.set_page_config(page_title="Backdrop Fix", layout="wide")
+st.set_page_config(page_title="Sidebar Block Test", layout="wide")
 
 # ------------------------------------------------
-# CUSTOM CSS WITH BACKDROP SQUARE
-# ------------------------------------------------
-st.markdown("""
-    <style>
-        /* Sidebar background */
-        [data-testid="stSidebar"] {
-            background-color: #006983 !important;
-            position: relative;
-        }
-
-        html, body, [data-testid="stAppViewContainer"] > .main {
-            background-color: white !important;
-            color: black !important;
-        }
-
-        /* Backdrop block behind menu items */
-        [data-testid="stSidebar"]::before {
-            content: "";
-            position: absolute;
-            top: 70px; /* push below the top padding */
-            left: 0;
-            width: 100%;
-            height: 120px; /* enough to cover 2 items */
-            background-color: #006983;
-            z-index: 0;
-        }
-
-        /* Menu styles */
-        .nav-link {
-            z-index: 1;
-            position: relative;
-        }
-
-        .nav-link-selected {
-            background-color: #00b4d8 !important;
-            color: #ffffff !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# ------------------------------------------------
-# SIDEBAR
+# PHYSICAL BLOCK INSERTED USING STREAMLIT
 # ------------------------------------------------
 with st.sidebar:
+    # Background color styling
+    st.markdown("""
+        <style>
+            [data-testid="stSidebar"] {
+                background-color: #006983 !important;
+            }
+            html, body, [data-testid="stAppViewContainer"] > .main {
+                background-color: white !important;
+                color: black !important;
+            }
+            .square-block {
+                height: 120px;
+                width: 100%;
+                background-color: #006983;
+                border: none;
+                margin-bottom: 10px;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # 🔲 THIS IS THE VISIBLE SQUARE
+    st.markdown('<div class="square-block"></div>', unsafe_allow_html=True)
+
+    # MENU BELOW SQUARE
     selected = option_menu(
         menu_title=None,
         options=["Home", "Predictor"],
@@ -79,8 +62,8 @@ with st.sidebar:
 # ------------------------------------------------
 if selected == "Home":
     st.title("🏠 Home")
-    st.write("A square block is rendered behind the menu to visually mask white edges.")
+    st.write("The square is above the menu in the sidebar. Do you see it?")
 
 elif selected == "Predictor":
     st.title("📊 Predictor")
-    st.write("The visual glitch should now be hidden by the background square.")
+    st.write("You can still navigate. The block should remain above the menu.")
