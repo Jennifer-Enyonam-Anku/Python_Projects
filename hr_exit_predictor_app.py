@@ -1,117 +1,101 @@
 import streamlit as st 
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
 from streamlit_option_menu import option_menu
-import joblib
 
 # ================================================
-# ULTIMATE SIDEBAR WHITE CORNERS FIX
+# NUCLEAR OPTION FOR WHITE CORNERS
 # ================================================
 st.markdown("""
 <style>
-    /* COMPLETE SIDEBAR OVERRIDE */
+    /* COMPLETE SIDEBAR OVERHAUL */
     [data-testid="stSidebar"] {
         background-color: #006983 !important;
         border: none !important;
     }
     
-    /* REMOVE ALL CONTAINER PADDING */
+    /* REMOVE ALL WHITE SPACES */
     [data-testid="stSidebar"] > div:first-child {
+        background-color: #006983 !important;
         padding: 0 !important;
         margin: 0 !important;
-        background-color: #006983 !important;
     }
     
-    /* TARGET MENU CONTAINER SPECIFICALLY */
-    .st-emotion-cache-1vq4p4l {
-        padding: 0 !important;
-        margin: 0 !important;
+    /* TARGET THE MENU CONTAINER */
+    [data-testid="stSidebarNav"] {
         background-color: #006983 !important;
+        margin-top: 0 !important;
     }
     
-    /* REMOVE ALL GAPS BETWEEN ITEMS */
-    .st-emotion-cache-1wbqy5l {
+    /* REMOVE ALL GAPS */
+    [data-testid="stSidebarNav"] ul {
         gap: 0 !important;
     }
     
-    /* FORCE SQUARE CORNERS ON ALL MENU ITEMS */
-    .st-emotion-cache-1wbqy5l > li > div {
+    /* FORCE SQUARE CORNERS */
+    [data-testid="stSidebarNav"] li > div,
+    [data-testid="stSidebarNav"] li > a {
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* HOVER STATE */
+    [data-testid="stSidebarNav"] li > div:hover,
+    [data-testid="stSidebarNav"] li > a:hover {
         border-radius: 0 !important;
     }
     
-    /* HOVER STATE FIX */
-    .st-emotion-cache-1wbqy5l > li > div:hover {
+    /* SELECTED STATE */
+    [data-testid="stSidebarNav"] li > .st-emotion-cache-1e5m18b {
         border-radius: 0 !important;
     }
     
-    /* SELECTED STATE FIX */
-    .st-emotion-cache-1wbqy5l > li > .st-emotion-cache-1e5m18b {
-        border-radius: 0 !important;
-    }
-    
-    /* FIRST ITEM FIX */
-    .st-emotion-cache-1wbqy5l > li:first-child > div {
+    /* FIRST ITEM */
+    [data-testid="stSidebarNav"] li:first-child > div,
+    [data-testid="stSidebarNav"] li:first-child > a {
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
     }
     
-    /* LAST ITEM FIX */
-    .st-emotion-cache-1wbqy5l > li:last-child > div {
+    /* LAST ITEM */
+    [data-testid="stSidebarNav"] li:last-child > div,
+    [data-testid="stSidebarNav"] li:last-child > a {
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
+    }
+    
+    /* OVERFLOW PROTECTION */
+    [data-testid="stSidebarNavItems"] {
+        overflow: hidden !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ================================================
-# PAGE CONFIGURATION
-# ================================================
-st.set_page_config(page_title="HR Exit Predictor", layout="wide")
-
-# ================================================
-# MODEL LOADING
-# ================================================
-model = joblib.load('logreg_model.pkl')
-scaler = joblib.load('scaler.pkl')
-X_columns = joblib.load('X_columns.pkl')
-
-# ================================================
-# PERFECT SIDEBAR MENU IMPLEMENTATION
+# SIDEBAR MENU IMPLEMENTATION
 # ================================================
 with st.sidebar:
     selected = option_menu(
         menu_title=None,
         options=["Home", "Predictor", "View Data", "About"],
-        icons=["house", "bar-chart", "folder", "info-circle"],
+        icons=["house", "bar-chart", "folder", "info-circle"], 
         default_index=0,
         styles={
             "container": {
                 "padding": "0 !important",
-                "margin": "0 !important",
+                "margin": "0 !important", 
                 "background-color": "#006983 !important",
                 "border": "none !important"
             },
-            "icon": {
-                "color": "#3edad8 !important", 
-                "font-size": "22px !important"
-            },
             "nav-link": {
-                "font-size": "20px !important",
-                "text-align": "left !important",
-                "margin": "0 !important",
-                "--hover-color": "#002c66 !important",
-                "color": "#ffffff !important",
-                "border-radius": "0 !important",
+                "font-size": "16px",
+                "text-align": "left",
+                "margin": "0",
+                "--hover-color": "#002c66",
+                "border-radius": "0",
                 "padding": "10px 15px !important",
-                "border": "none !important"
             },
             "nav-link-selected": {
-                "background-color": "#00b4d8 !important",
-                "color": "#ffffff !important",
-                "border-radius": "0 !important",
-                "border": "none !important"
+                "background-color": "#00b4d8",
+                "border-radius": "0",
             },
         }
     )
