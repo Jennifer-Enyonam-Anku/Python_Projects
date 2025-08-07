@@ -27,11 +27,8 @@ st.markdown("""
     }
 
     /* SPECIFIC FIX FOR THE OPTION MENU COMPONENT */
-    div[data-testid="stSidebarNav"] > div > ul {
-        background-color: #006983 !important;
+    #root > div:nth-child(1) > div > div > div > div > section > div > div:nth-child(1) > div > div > div > nav > ul {
         border-radius: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
     }
     
     /* FIX FOR SIDEBAR CONTENT WRAPPER */
