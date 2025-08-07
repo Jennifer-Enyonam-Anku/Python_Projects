@@ -12,55 +12,16 @@ import joblib
 st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 
 # ------------------------------------------------
-# CUSTOM STYLING - FOCUSED ON SIDEBAR WHITE CORNERS
+# CUSTOM STYLING
 # ------------------------------------------------
 st.markdown("""
     <style>
-        /* Main sidebar container */
         [data-testid="stSidebar"] {
             background-color: #006983 !important;
-            border: none !important;
         }
-        
-        /* Remove any potential white space around sidebar */
         [data-testid="stSidebar"] > div:first-child {
-            background-color: #006983 !important;
-            padding-top: 0rem !important;
-            padding-bottom: 0rem !important;
+            border-right: none;
         }
-        
-        /* Sidebar navigation container */
-        [data-testid="stSidebarNav"] {
-            background-color: #006983 !important;
-            margin-top: 0rem !important;
-        }
-        
-        /* Remove any border or gap between items */
-        .st-emotion-cache-1cypcdb {
-            gap: 0rem !important;
-        }
-        
-        /* Remove border radius from menu items */
-        .st-emotion-cache-1wbqy5l {
-            border-radius: 0 !important;
-        }
-        
-        /* Remove padding around the menu container */
-        .st-emotion-cache-1vq4p4l {
-            padding: 0 !important;
-        }
-        
-        /* Remove any potential white space at the top */
-        .st-emotion-cache-1oe5cao {
-            padding-top: 0rem !important;
-        }
-        
-        /* Main content area adjustments */
-        .st-emotion-cache-uf99v8 {
-            padding-left: 1rem !important;
-        }
-        
-        /* Original styling for other elements */
         html, body, [data-testid="stAppViewContainer"] > .main {
             background-color: white !important;
             color: black !important;
@@ -79,7 +40,7 @@ st.markdown("""
             background: #002c66 !important;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(3) {
-            background: #af4c0f !important;
+            background: #002c66 !important;
         }
         div[data-baseweb="slider"] [role="slider"] {
             background-color: #002c66 !important;
@@ -94,7 +55,7 @@ st.markdown("""
             border: none;
         }
         div.stButton > button:hover {
-            background-color: #af4c0f !important;
+            background-color: #002c66 !important;
         }
         .block-container {
             padding-top: 2rem;
@@ -111,7 +72,7 @@ scaler = joblib.load('scaler.pkl')
 X_columns = joblib.load('X_columns.pkl')
 
 # ------------------------------------------------
-# SIDEBAR MENU - WITH ADJUSTED STYLING
+# SIDEBAR MENU
 # ------------------------------------------------
 with st.sidebar:
     selected = option_menu(
@@ -121,28 +82,18 @@ with st.sidebar:
         default_index=0,
         orientation="vertical",
         styles={
-            "container": {
-                "padding": "0!important", 
-                "background-color": "#006983",
-                "border": "none",
-                "margin": "0!important"
-            },
+            "container": {"padding": "0!important", "background-color": "#006983"},
             "icon": {"color": "#3edad8", "font-size": "22px"},
             "nav-link": {
                 "font-size": "20px",
                 "text-align": "left",
                 "margin": "0px",
                 "--hover-color": "#002c66",
-                "color": "#ffffff",
-                "border-radius": "0px",
-                "padding": "10px 15px",
-                "border": "none"
+                "color": "#ffffff"
             },
             "nav-link-selected": {
                 "background-color": "#00b4d8",
-                "color": "#ffffff",
-                "border-radius": "0px",
-                "border": "none"
+                "color": "#ffffff"
             },
         },
     )
