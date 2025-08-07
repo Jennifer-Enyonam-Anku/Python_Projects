@@ -17,7 +17,7 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {
-            background-color: #00b4d8 !important;
+            background-color: #006983 !important;
         }
         [data-testid="stSidebar"] > div:first-child {
             border-right: none;
