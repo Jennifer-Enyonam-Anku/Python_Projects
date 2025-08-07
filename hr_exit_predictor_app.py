@@ -1,4 +1,7 @@
-import streamlit as st 
+Yes, here is the full, rewritten code with the CSS fix to remove the white corner edges around the side menu button. I've added a specific CSS rule `ul[data-baseweb="menu"]` to target the menu container and set its border-radius to 0, which should resolve the issue.
+
+```python
+import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -15,29 +18,36 @@ st.markdown("""
     [data-testid="stSidebar"] {
         background-color: #006983 !important;
     }
-    
+
     [data-testid="stSidebar"] > div:first-child {
         background-color: #006983 !important;
         padding: 0 !important;
         margin: 0 !important;
     }
-    
+
     [data-testid="stSidebar"] > div:first-child > div > div {
         background-color: #006983 !important;
         margin: 0 !important;
         padding: 0 !important;
     }
-    
+
     .st-emotion-cache-1vq4p4l {
         padding: 0 !important;
         margin: 0 !important;
         background-color: #006983 !important;
     }
-    
+
     .st-emotion-cache-1wbqy5l {
         gap: 0 !important;
     }
     
+    /* FIX FOR THE WHITE CORNERS AROUND THE MENU */
+    ul[data-baseweb="menu"] {
+        border-radius: 0px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
     /* MAIN CONTENT STYLING */
     .st-emotion-cache-uf99v8 {
         padding-left: 1rem !important;
@@ -97,12 +107,17 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 # ================================================
 # MODEL LOADING
 # ================================================
-model = joblib.load('logreg_model.pkl')
-scaler = joblib.load('scaler.pkl')
-X_columns = joblib.load('X_columns.pkl')
+# Assume 'logreg_model.pkl', 'scaler.pkl', and 'X_columns.pkl' exist in the same directory
+try:
+    model = joblib.load('logreg_model.pkl')
+    scaler = joblib.load('scaler.pkl')
+    X_columns = joblib.load('X_columns.pkl')
+except FileNotFoundError:
+    st.error("Error: Model files ('logreg_model.pkl', 'scaler.pkl', 'X_columns.pkl') not found.")
+    st.stop()
 
 # ================================================
-# SIDEBAR MENU - WITH WHITE CORNERS FIXED
+# SIDEBAR MENU
 # ================================================
 with st.sidebar:
     selected = option_menu(
@@ -291,9 +306,7 @@ elif selected == "About":
 
     ---
     ### 👩🏽‍💻 Developed By
-    **Jennifer Enyonam**  
-    *Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate*  
-    Passionate about using data and technology to drive real-world solutions in HR, energy, and society at large.
+    **Jennifer Enyonam** *Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate* Passionate about using data and technology to drive real-world solutions in HR, energy, and society at large.
 
     ---
     ### ❤️ Special Notes
@@ -309,3 +322,4 @@ elif selected == "About":
     ---
     """)
     st.image("https://cdn-icons-png.flaticon.com/512/9074/9074702.png", width=300, caption="Powered by Data. Guided by Purpose.")
+```
