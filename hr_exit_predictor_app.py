@@ -1,101 +1,141 @@
 import streamlit as st 
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
 from streamlit_option_menu import option_menu
+import joblib
 
 # ================================================
-# NUCLEAR OPTION FOR WHITE CORNERS
+# CRITICAL STYLING FIXES - MUST COME FIRST
 # ================================================
 st.markdown("""
 <style>
-    /* COMPLETE SIDEBAR OVERHAUL */
+    /* NUCLEAR OPTION FOR SIDEBAR WHITE CORNERS */
     [data-testid="stSidebar"] {
         background-color: #006983 !important;
-        border: none !important;
     }
     
-    /* REMOVE ALL WHITE SPACES */
     [data-testid="stSidebar"] > div:first-child {
         background-color: #006983 !important;
         padding: 0 !important;
         margin: 0 !important;
     }
     
-    /* TARGET THE MENU CONTAINER */
-    [data-testid="stSidebarNav"] {
+    [data-testid="stSidebar"] > div:first-child > div > div {
         background-color: #006983 !important;
-        margin-top: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
-    /* REMOVE ALL GAPS */
-    [data-testid="stSidebarNav"] ul {
+    .st-emotion-cache-1vq4p4l {
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: #006983 !important;
+    }
+    
+    .st-emotion-cache-1wbqy5l {
         gap: 0 !important;
     }
     
-    /* FORCE SQUARE CORNERS */
-    [data-testid="stSidebarNav"] li > div,
-    [data-testid="stSidebarNav"] li > a {
-        border-radius: 0 !important;
-        margin: 0 !important;
+    /* MAIN CONTENT STYLING */
+    .st-emotion-cache-uf99v8 {
+        padding-left: 1rem !important;
     }
     
-    /* HOVER STATE */
-    [data-testid="stSidebarNav"] li > div:hover,
-    [data-testid="stSidebarNav"] li > a:hover {
-        border-radius: 0 !important;
+    /* FORM ELEMENTS STYLING */
+    .stSelectbox > div,
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: #90e0ef !important;
+        border-radius: 8px !important; 
     }
     
-    /* SELECTED STATE */
-    [data-testid="stSidebarNav"] li > .st-emotion-cache-1e5m18b {
-        border-radius: 0 !important;
+    input[type="number"] {
+        background-color: #90e0ef !important;
+        border-radius: 8px !important;
+        padding: 0.4rem !important;
     }
     
-    /* FIRST ITEM */
-    [data-testid="stSidebarNav"] li:first-child > div,
-    [data-testid="stSidebarNav"] li:first-child > a {
-        border-top-left-radius: 0 !important;
-        border-top-right-radius: 0 !important;
+    div[data-baseweb="slider"] > div > div > div:nth-child(2) {
+        background: #002c66 !important;
     }
     
-    /* LAST ITEM */
-    [data-testid="stSidebarNav"] li:last-child > div,
-    [data-testid="stSidebarNav"] li:last-child > a {
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
+    div[data-baseweb="slider"] > div > div > div:nth-child(3) {
+        background: #af4c0f !important;
     }
     
-    /* OVERFLOW PROTECTION */
-    [data-testid="stSidebarNavItems"] {
-        overflow: hidden !important;
+    div[data-baseweb="slider"] [role="slider"] {
+        background-color: #002c66 !important;
+    }
+    
+    div.stButton > button {
+        background-color: #002c66 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        height: 3em !important;
+        width: auto !important;
+        padding: 0.6rem 1.5rem !important;
+        border: none !important;
+    }
+    
+    div.stButton > button:hover {
+        background-color: #af4c0f !important;
+    }
+    
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ================================================
-# SIDEBAR MENU IMPLEMENTATION
+# PAGE CONFIGURATION
+# ================================================
+st.set_page_config(page_title="HR Exit Predictor", layout="wide")
+
+# ================================================
+# MODEL LOADING
+# ================================================
+model = joblib.load('logreg_model.pkl')
+scaler = joblib.load('scaler.pkl')
+X_columns = joblib.load('X_columns.pkl')
+
+# ================================================
+# SIDEBAR MENU - WITH WHITE CORNERS FIXED
 # ================================================
 with st.sidebar:
     selected = option_menu(
         menu_title=None,
         options=["Home", "Predictor", "View Data", "About"],
-        icons=["house", "bar-chart", "folder", "info-circle"], 
+        icons=["house", "bar-chart", "folder", "info-circle"],
         default_index=0,
         styles={
             "container": {
                 "padding": "0 !important",
-                "margin": "0 !important", 
+                "margin": "0 !important",
                 "background-color": "#006983 !important",
                 "border": "none !important"
             },
+            "icon": {
+                "color": "#3edad8 !important", 
+                "font-size": "22px !important"
+            },
             "nav-link": {
-                "font-size": "16px",
-                "text-align": "left",
-                "margin": "0",
-                "--hover-color": "#002c66",
-                "border-radius": "0",
+                "font-size": "20px !important",
+                "text-align": "left !important",
+                "margin": "0 !important",
+                "--hover-color": "#002c66 !important",
+                "color": "#ffffff !important",
+                "border-radius": "0 !important",
                 "padding": "10px 15px !important",
+                "border": "none !important"
             },
             "nav-link-selected": {
-                "background-color": "#00b4d8",
-                "border-radius": "0",
+                "background-color": "#00b4d8 !important",
+                "color": "#ffffff !important",
+                "border-radius": "0 !important",
+                "border": "none !important"
             },
         }
     )
