@@ -126,7 +126,7 @@ with st.sidebar:
                 "text-align": "left !important",
                 "margin": "0 !important",
                 "--hover-color": "#002c66 !important",
-                "color": "#000000 !important",
+                "color": "#ffffff !important",
                 "border-radius": "0 !important",
                 "padding": "10px 15px !important",
                 "border": "none !important"
