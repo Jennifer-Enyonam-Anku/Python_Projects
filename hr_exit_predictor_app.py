@@ -1,6 +1,3 @@
-Yes, here is the full, rewritten code with the CSS fix to remove the white corner edges around the side menu button. I've added a specific CSS rule `ul[data-baseweb="menu"]` to target the menu container and set its border-radius to 0, which should resolve the issue.
-
-```python
 import streamlit as st
 import pandas as pd
 import numpy as np
