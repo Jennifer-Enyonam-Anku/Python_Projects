@@ -27,6 +27,11 @@ st.markdown("""
         margin: 0 !important;
         padding: 0 !important;
     }
+    
+    /* MORE AGGRESSIVE FIX FOR THE WHITE CORNERS AROUND THE MENU */
+    div[data-testid="stSidebarNav"] ul {
+        border-radius: 0px !important;
+    }
 
     .st-emotion-cache-1vq4p4l {
         padding: 0 !important;
@@ -36,13 +41,6 @@ st.markdown("""
 
     .st-emotion-cache-1wbqy5l {
         gap: 0 !important;
-    }
-    
-    /* FIX FOR THE WHITE CORNERS AROUND THE MENU */
-    ul[data-baseweb="menu"] {
-        border-radius: 0px !important;
-        padding: 0 !important;
-        margin: 0 !important;
     }
 
     /* MAIN CONTENT STYLING */
