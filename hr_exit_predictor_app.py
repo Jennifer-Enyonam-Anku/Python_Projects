@@ -17,7 +17,7 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {
-            background-color: #006983 !important;
+            background-color: #E3E7F7 !important;
         }
         [data-testid="stSidebar"] > div:first-child {
             border-right: none;
@@ -28,25 +28,25 @@ st.markdown("""
         }
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #90e0ef !important;
-            border-radius: 8px; 
+            background-color: #E3E7F7 !important;
+            border-radius: 8px;
         }
         input[type="number"] {
-            background-color: #90e0ef !important;
+            background-color: #E3E7F7 !important;
             border-radius: 8px;
             padding: 0.4rem;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-            background: #002c66 !important;
+            background: #4B0082 !important;
         }
         div[data-baseweb="slider"] > div > div > div:nth-child(3) {
-            background: #002c66 !important;
+            background: #e6e6e6 !important;
         }
         div[data-baseweb="slider"] [role="slider"] {
-            background-color: #002c66 !important;
+            background-color: #4B0082 !important;
         }
         div.stButton > button {
-            background-color: #002c66 !important;
+            background-color: #4B0082 !important;
             color: white !important;
             border-radius: 8px !important;
             height: 3em;
@@ -55,7 +55,7 @@ st.markdown("""
             border: none;
         }
         div.stButton > button:hover {
-            background-color: #002c66 !important;
+            background-color: #3a006b !important;
         }
         .block-container {
             padding-top: 2rem;
@@ -82,18 +82,18 @@ with st.sidebar:
         default_index=0,
         orientation="vertical",
         styles={
-            "container": {"padding": "0!important", "background-color": "#006983"},
-            "icon": {"color": "#3edad8", "font-size": "22px"},
+            "container": {"padding": "0!important", "background-color": "#E3E7F7"},
+            "icon": {"color": "#4B0082", "font-size": "20px"},
             "nav-link": {
-                "font-size": "20px",
+                "font-size": "16px",
                 "text-align": "left",
                 "margin": "0px",
-                "--hover-color": "#002c66",
-                "color": "#ffffff"
+                "--hover-color": "#D5D9F0",
+                "color": "#333333"
             },
             "nav-link-selected": {
-                "background-color": "#00b4d8",
-                "color": "#ffffff"
+                "background-color": "#C2C7EA",
+                "color": "#000000"
             },
         },
     )
