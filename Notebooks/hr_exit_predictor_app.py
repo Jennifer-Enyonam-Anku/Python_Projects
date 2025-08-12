@@ -1,10 +1,32 @@
-import streamlit as st 
+import os
+import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from streamlit_option_menu import option_menu
 import joblib
+
+# ------------------------------------------------
+# PROJECT PATHS (do not change unless you rename folders)
+# ------------------------------------------------
+PROJECT_NAME = "PREDICTING EMPLOYEE ATTRITION"
+MODELS_DIR = os.path.join("Models", PROJECT_NAME)
+DATASETS_DIR = os.path.join("Datasets", PROJECT_NAME)
+
+# ------------------------------------------------
+# FILE NAMES (edit if different)
+# ------------------------------------------------
+MODEL_FILE = "logreg_model.pkl"
+SCALER_FILE = "scaler.pkl"
+XCOLS_FILE = "X_columns.pkl"
+DATA_FILE = "Employee Records.csv"   # <- change if your CSV has a different name
+
+# Full paths
+MODEL_PATH = os.path.join(MODELS_DIR, MODEL_FILE)
+SCALER_PATH = os.path.join(MODELS_DIR, SCALER_FILE)
+XCOLS_PATH = os.path.join(MODELS_DIR, XCOLS_FILE)
+DATA_PATH = os.path.join(DATASETS_DIR, DATA_FILE)
 
 # ------------------------------------------------
 # PAGE CONFIGURATION
@@ -16,60 +38,46 @@ st.set_page_config(page_title="HR Exit Predictor", layout="wide")
 # ------------------------------------------------
 st.markdown("""
     <style>
-        [data-testid="stSidebar"] {
-            background-color: #006983 !important;
-        }
-        [data-testid="stSidebar"] > div:first-child {
-            border-right: none;
-        }
+        [data-testid="stSidebar"] { background-color: #006983 !important; }
+        [data-testid="stSidebar"] > div:first-child { border-right: none; }
         html, body, [data-testid="stAppViewContainer"] > .main {
-            background-color: white !important;
-            color: black !important;
+            background-color: white !important; color: black !important;
         }
         .stSelectbox > div,
         .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #90e0ef !important;
-            border-radius: 8px; 
+            background-color: #90e0ef !important; border-radius: 8px;
         }
-        input[type="number"] {
-            background-color: #90e0ef !important;
-            border-radius: 8px;
-            padding: 0.4rem;
-        }
-        div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-            background: #002c66 !important;
-        }
-        div[data-baseweb="slider"] > div > div > div:nth-child(3) {
-            background: #002c66 !important;
-        }
-        div[data-baseweb="slider"] [role="slider"] {
-            background-color: #002c66 !important;
-        }
+        input[type="number"] { background-color: #90e0ef !important; border-radius: 8px; padding: 0.4rem; }
+        div[data-baseweb="slider"] > div > div > div:nth-child(2),
+        div[data-baseweb="slider"] > div > div > div:nth-child(3),
+        div[data-baseweb="slider"] [role="slider"] { background-color: #002c66 !important; }
         div.stButton > button {
-            background-color: #002c66 !important;
-            color: white !important;
-            border-radius: 8px !important;
-            height: 3em;
-            width: auto;
-            padding: 0.6rem 1.5rem;
-            border: none;
+            background-color: #002c66 !important; color: white !important; border-radius: 8px !important;
+            height: 3em; width: auto; padding: 0.6rem 1.5rem; border: none;
         }
-        div.stButton > button:hover {
-            background-color: #002c66 !important;
-        }
-        .block-container {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
+        div.stButton > button:hover { background-color: #002c66 !important; }
+        .block-container { padding-top: 2rem; padding-bottom: 2rem; }
     </style>
 """, unsafe_allow_html=True)
 
 # ------------------------------------------------
 # MODEL LOADING
 # ------------------------------------------------
-model = joblib.load('logreg_model.pkl')
-scaler = joblib.load('scaler.pkl')
-X_columns = joblib.load('X_columns.pkl')
+@st.cache_resource
+def load_artifacts():
+    model = joblib.load(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
+    xcols = joblib.load(XCOLS_PATH)
+    return model, scaler, xcols
+
+try:
+    model, scaler, X_columns = load_artifacts()
+except FileNotFoundError as e:
+    st.error(f"Artifact not found: {e}")
+    st.stop()
+except Exception as e:
+    st.error(f"Failed to load model artifacts: {e}")
+    st.stop()
 
 # ------------------------------------------------
 # SIDEBAR MENU
@@ -85,16 +93,10 @@ with st.sidebar:
             "container": {"padding": "0!important", "background-color": "#006983"},
             "icon": {"color": "#3edad8", "font-size": "22px"},
             "nav-link": {
-                "font-size": "20px",
-                "text-align": "left",
-                "margin": "0px",
-                "--hover-color": "#002c66",
-                "color": "#ffffff"
+                "font-size": "20px", "text-align": "left", "margin": "0px",
+                "--hover-color": "#002c66", "color": "#ffffff"
             },
-            "nav-link-selected": {
-                "background-color": "#00b4d8",
-                "color": "#002c66"
-            },
+            "nav-link-selected": {"background-color": "#00b4d8", "color": "#002c66"},
         },
     )
 
@@ -103,18 +105,18 @@ with st.sidebar:
 # ------------------------------------------------
 if selected == "Home":
     st.title("🏠 Welcome to the HR Exit Predictor")
-    st.markdown("""
-    This application is designed to help HR professionals identify employees who are likely to leave the organization, using historical data and machine learning.
+    st.markdown(f"""
+    This application helps HR professionals identify employees who may be at risk of leaving, using historical data and machine learning.
 
     ---
     ### 🔍 What You Can Do:
-    - Predict Exit Risk: Use the Predictor tab to estimate the probability that an employee will leave based on input features like age, department, salary, etc.
-    - Explore the Data: View employee-related datasets.
-    - Learn More: Visit the About section for more information on the app's purpose and development.
-    
+    - **Predict Exit Risk:** Use the Predictor tab to estimate the probability that an employee will leave.
+    - **Explore the Data:** View the dataset used to train the model.
+    - **Learn More:** Visit the About section for details.
+
     ---
     ### 📊 How It Works:
-    We use a Random Forest +SMOTE model trained on HR data to analyze patterns and predict exit probabilities. Inputs are standardized and encoded before feeding into the model.
+    We use a **Logistic Regression** model (with standardization and one-hot encoding) trained on HR data to analyze patterns and predict exit probabilities.
 
     ---
     ### 📎 Disclaimer:
@@ -157,11 +159,13 @@ elif selected == "Predictor":
             'Salary': [salary]
         })
 
+        # Ensure categorical types for consistent one-hot encoding
         for col in ['Job Title', 'Department', 'Gender', 'Marital Status']:
             new_data[col] = new_data[col].astype('category')
 
         new_encoded = pd.get_dummies(new_data)
 
+        # Align columns with training set
         for col in X_columns:
             if col not in new_encoded.columns:
                 new_encoded[col] = 0
@@ -173,11 +177,11 @@ elif selected == "Predictor":
 
         st.markdown("### 💡 HR Recommendation")
         if prob < 30:
-            st.info("🟢 Low Risk: The employee is likely to stay. Continue monitoring and provide regular support.")
+            st.info("🟢 Low Risk: Likely to stay. Continue monitoring and provide regular support.")
         elif 30 <= prob <= 70:
-            st.warning("🟡 Moderate Risk: Engage the employee. Consider offering professional development, mentorship, or workload reviews.")
+            st.warning("🟡 Moderate Risk: Engage with development, mentorship, or workload review.")
         else:
-            st.error("🔴 High Risk: Take immediate action. Consider a one-on-one conversation, career growth incentives, or team reassignment.")
+            st.error("🔴 High Risk: Act quickly—1:1 conversation, growth incentives, or reassignment.")
 
 # ------------------------------------------------
 # VIEW DATA TAB
@@ -186,12 +190,12 @@ elif selected == "View Data":
     st.title("📁 View Employee Records")
 
     try:
-        df = pd.read_csv("Employee Records.csv")
+        df = pd.read_csv(DATA_PATH)
 
         st.markdown(f"Shape: {df.shape[0]} rows × {df.shape[1]} columns")
 
         with st.expander("📄 Preview DataFrame"):
-            st.dataframe(df.style.set_properties({'background-color': '#F0F4FF'}, subset=df.columns))
+            st.dataframe(df)
 
         with st.expander("🧾 Data Summary"):
             st.write(df.describe(include='all').T)
@@ -210,22 +214,18 @@ elif selected == "View Data":
         st.dataframe(filtered_df.reset_index(drop=True))
 
         st.markdown("### 📊 Insights")
-
         col1, col2 = st.columns(2)
-
         with col1:
             st.markdown("Gender Distribution")
-            gender_count = filtered_df['Gender'].value_counts()
-            st.bar_chart(gender_count)
-
+            st.bar_chart(filtered_df['Gender'].value_counts())
         with col2:
             st.markdown("Department Breakdown")
-            dept_count = filtered_df['Department'].value_counts()
-            st.bar_chart(dept_count)
+            st.bar_chart(filtered_df['Department'].value_counts())
 
+    except FileNotFoundError:
+        st.error(f"⚠ Data file not found at: {DATA_PATH}")
     except Exception as e:
         st.error(f"⚠ Error loading data: {e}")
-        st.info("Please make sure 'Employee Records.csv' is in the same directory or uploaded correctly.")
 
 # ------------------------------------------------
 # ABOUT TAB
@@ -233,37 +233,22 @@ elif selected == "View Data":
 elif selected == "About":
     st.title("ℹ About This App")
     st.markdown("""
-    Welcome to the HR Exit Predictor – an intelligent, data-driven application designed to empower HR professionals with the insights they need to make proactive talent decisions.
-
-    ---
-    ### 🎯 Purpose
-    This tool predicts the likelihood that an employee may exit an organization. The aim is to support HR managers in identifying potential retention risks early and making informed interventions.
+    This tool predicts the likelihood that an employee may exit an organization to support early, data-informed retention actions.
 
     ---
     ### 🛠 Technologies Used
-    - Python for scripting  
-    - Pandas and NumPy for data handling  
-    - Scikit-learn for building the Logistic Regression model  
-    - Streamlit for crafting an interactive user interface  
-    - Joblib for saving and loading model artifacts
+    - Python, Pandas, NumPy  
+    - Scikit-learn (Logistic Regression)  
+    - Streamlit  
+    - Joblib (model artifacts)
 
     ---
     ### 👩🏽‍💻 Developed By
     Jennifer Enyonam  
-    Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate  
-    Passionate about using data and technology to drive real-world solutions in HR, energy, and society at large.
-
-    ---
-    ### ❤ Special Notes
-    - This is a demonstration tool meant for educational and analytical purposes.
-    - Always complement data-driven decisions with human judgment and organizational context.
+    Electrical & Electronics Engineer | Data Enthusiast | Women in STEM Advocate
 
     ---
     ### 📫 Contact / Feedback
-    Feel free to connect or provide feedback to help improve this app!  
-    - LinkedIn: [Jennifer Enyonam](https://www.linkedin.com)  
     - Email: ankujenyonam5@gmail.com
-
-    ---
     """)
     st.image("https://cdn-icons-png.flaticon.com/512/9074/9074702.png", width=300, caption="Powered by Data. Guided by Purpose.")
